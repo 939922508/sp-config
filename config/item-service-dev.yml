@@ -1,24 +1,23 @@
 spring:
-  application:
-    name: item-service
-  cloud:
+ application:
+   name: item-service
+   cloud:
     config:
-      override-none: true  
-  rabbitmq:
+      override-none: true
+      #连接信息
+   rabbitmq:
     host: 192.168.64.140
     port: 5672
     username: admin
     password: admin
+    
 server:
-  port: 8001
+ port: 8001
 
 eureka:
-  instance:
-    prefer-ip-address: true  #以id地址注册
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port} # 界面列表中显示的格式也显示ip
-  client:
-    service-url:
-      defaultZone: http://eureka1:2001/eureka,http://eureka2:2002/eureka #默认位置，可以修改为具体地理位置，比如：beiJing, shangHai, shenZhen 等，表示 eureka 服务器的部署位置, 需要云服务器提供
-    registry-fetch-interval-seconds: 30 #拉取注册信息间隔时间，默认 30 秒
-  instance:
-    lease-renewal-interval-in-seconds: 30 #心跳间隔时间，默认 30 秒
+ client:
+   service-url:
+     defaultZone: http://eureka1:2001/eureka,http://eureka2:2002/eureka
+
+
+     
