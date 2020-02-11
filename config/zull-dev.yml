@@ -24,8 +24,8 @@ zuul:
     item-service: /item-service/**
     user-service: /user-service/**
     order-service: /order-service/**
-  #启用重试  
-  retryable: true  默认false,zuul默认不推荐使用重试
+  #启用重试  默认false,zuul默认不推荐使用重试
+  retryable: true  
   
   #重试配置超时
 ribbon:
