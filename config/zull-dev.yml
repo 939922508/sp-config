@@ -1,16 +1,15 @@
+
 spring:
   application:
     name: zuul
   cloud:
     config:
-      override-none: true
-
+      override-none: true  
   rabbitmq:
     host: 192.168.64.140
     port: 5672
     username: admin
     password: admin
-    
 server:
   port: 3001
   
@@ -18,16 +17,18 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+  instance:
+    prefer-ip-address: true  #以id地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port} # 界面列表中显示的格式也显示ip    
 
-zuul:
+zuul:  #路由配置  **指的是所有下级目录  一个^是一级下级目录
   routes:
     item-service: /item-service/**
     user-service: /user-service/**
     order-service: /order-service/**
-  #启用重试  默认false,zuul默认不推荐使用重试
-  retryable: true  
+  retryable: true  #启用重试
+  sensitive-headers:
   
-  #重试配置超时
 ribbon:
   ConnectTimeout: 1000
   ReadTimeout: 1000
@@ -40,11 +41,6 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 500
-#暴露端点            
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
-        
+            timeoutInMilliseconds: 500  
+   
+            
